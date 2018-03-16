@@ -16,8 +16,9 @@ slope = [0, 0, 0];
 intercept = [a, b, c] * xx;
 
 %% Only for recorder
-Step = 1; Begin = 3; End = 50; RangOfL = Begin : Step: End;
+Step = 1; Begin = 2; End = 50; RangOfL = Begin : Step: End;
 recorder_L=zeros(length(RangOfL),2);
+recorder_L_var=zeros(length(RangOfL),2);
 recorder_re = zeros(repeat,2); % repeat the simulation many times and get the mean value(!!If it is proper)
 for L = RangOfL
     tmp = (n - L) ;
@@ -46,8 +47,13 @@ for L = RangOfL
         recorder_re(num,:) = beta';
     end
     recorder_L((L-Begin)/Step+1,:)=mean(recorder_re); % Strange setting, Caution; ignore var
+    recorder_L_var((L-Begin)/Step+1,:)=var(recorder_re); % Strange setting, Caution; ignore var
 end
 figure()
 hold on
 plot(RangOfL, recorder_L(:,1)) % beta(1) is sigma^2 -- varicance
 plot(RangOfL, recorder_L(:,2),'--') % beta(2) is gamma -- jump size
+figure()
+hold on
+plot(RangOfL, recorder_L_var(:,1)) % beta(1) is sigma^2 -- varicance
+plot(RangOfL, recorder_L_var(:,2),'--') % beta(2) is gamma -- jump size
