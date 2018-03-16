@@ -4,7 +4,7 @@
 a = 0; b = 1; c= -0.5; n = 100; L = 10; tau = [0.25, 0.5, 1]; sigma = 0.5; repeat =100; 
 x = 1/n : 1/n : 1;
 xx = [x;x;x];
-for ii = 1 : length(tau) 
+for ii = 1 : length(tau)
     xx(ii,xx(ii,:)>tau(ii)) = 0; 
     if ii ~= 1
         xx(ii,xx(ii,:) <= tau(ii-1)) = 0; 
@@ -30,7 +30,7 @@ for L = RangOfL
     for num = 1 : repeat
         epsilon = sigma * randn(1,n);
         y = slope * xx + intercept + epsilon;
-    %     plot(x, y, '.')
+        % plot(x, y, '.')
         for ii = 1 : L
             tmp = 0;
             for jj = 1 : n - L
